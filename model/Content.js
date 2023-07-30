@@ -10,6 +10,10 @@ const contentSchema = new Schema({
         type: String,
         required: true
     },
+    downloadLink:{
+        type: String,
+        required: true
+    },
     timeStamp:{
         type: Date,
     }

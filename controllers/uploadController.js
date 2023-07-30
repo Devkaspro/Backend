@@ -45,6 +45,7 @@ const createNewFile = async(req, res) => {
             const result = await Content.create({
                 filename: fileName,
                 link: `${link}/files/${fileName}`,
+                downloadLink:'http://192.168.155.90:5001/files/'+fileName,
                 timeStamp: new Date()
             })
             res.status(201).json(result);
