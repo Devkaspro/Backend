@@ -1,19 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const ContactUs = new Schema({
-    username: {
+const contactUsSchema = new Schema({
+    name: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
-    emailId: {
+    email: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     message: {
         type: String,
         required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
     }
 });
 

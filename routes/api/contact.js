@@ -1,9 +1,9 @@
 const express = require('express');
-const contactUsuser = require('../../controllers/contactUsController');
+const contactUsController = require('../../controllers/contactUsController');
 const router = express.Router();
 
-router.route('/',)
-    .post(contactUsuser);
-
+router.route('/')
+    .post(contactUsController.contactUser)
+    .get(contactUsController.getAllMessages);
 
 module.exports = router;
