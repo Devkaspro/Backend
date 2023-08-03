@@ -6,17 +6,20 @@ const contentSchema = new Schema({
         type: String,
         required: true
     },
-    link:{
+    link: {
         type: String,
         required: true
     },
-    downloadLink:{
+    downloadLink: {
         type: String,
         required: true
     },
-    timeStamp:{
-        type: Date,
+    timeStamp: {
+        type: Date
+    },
+    expirationDate: {
+        type: Date
     }
-})
+});
 
 module.exports = mongoose.model('Content', contentSchema);

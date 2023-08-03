@@ -9,13 +9,16 @@ const Content = require('../model/Content');
 //     return () => randomFillSync(buf).toString('hex');
 // })();
 
+// Create a new content with an expiration date
+const expirationDurationInMinutes = 60;
+
 const uploadFile = (req, res) => {
     const link = localStorage.getItem('STORELINK');
     const bb = busboy({ headers: req.headers });
     let fileName = '';
     bb.on('file', (name, file, info) => {
         fileName = info.filename;
-        const saveTo = path.join(__dirname, '..', 'public/images', `${ info.filename }`);
+        const saveTo = path.join(__dirname, '..', 'public/images', `${  .filename }`);
         file.pipe(fs.createWriteStream(saveTo));
     });
     bb.on('close', () => {
@@ -34,6 +37,9 @@ const createNewFile = async (req, res) => {
 
     bb.on('file', async (name, file, info) => {
         const fileName = info.filename;
+        const expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + expirationDurationInMinutes * 60 * 1000);
+
         const saveTo = path.join(__dirname, '..', 'public/images', `${ info.filename }`);
         file.pipe(fs.createWriteStream(saveTo));
         console.log(fileName, "fileName");
@@ -48,7 +54,8 @@ const createNewFile = async (req, res) => {
                 filename: fileName,
                 link: `${ link }/files/${ fileName }`,
                 downloadLink: 'http://192.168.1.21:5001/files/' + fileName,
-                timeStamp: new Date()
+                timeStamp: new Date(),
+                expirationDate: expirationDate,
             });
             res.status(201).json(result);
         } catch (err)
