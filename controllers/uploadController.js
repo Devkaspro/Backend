@@ -18,7 +18,7 @@ const uploadFile = (req, res) => {
     let fileName = '';
     bb.on('file', (name, file, info) => {
         fileName = info.filename;
-        const saveTo = path.join(__dirname, '..', 'public/images', `${  .filename }`);
+        const saveTo = path.join(__dirname, '..', 'public/images', `${ info.filename }`);
         file.pipe(fs.createWriteStream(saveTo));
     });
     bb.on('close', () => {
@@ -70,11 +70,11 @@ const createNewFile = async (req, res) => {
 const getSingleFile = async (req, res) => {
     if (!req?.params?.id) return res.status(400).json({ 'messge': 'File ID required' });
     const file = await Content.findOne({ _id: req.params.id });
-    if (!file)
+    if (!file?.downloadLink)
     {
-        return res.status(204).json({ 'message': `No File metches ID ${ req.params.id }` });
+        return res.status(400).send("Link is expired");
     }
-    res.json(file);
+    res.redirect(file?.downloadLink);
 };
 
 

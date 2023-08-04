@@ -9,5 +9,8 @@ router.route('/')
 router.route('/:id')
 .get(getSingleFile)
 
+router.route('/download/:id')
+.get(getSingleFile)
+
 // Delete file should be automatic
 module.exports = router;

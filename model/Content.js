@@ -12,7 +12,8 @@ const contentSchema = new Schema({
     },
     downloadLink: {
         type: String,
-        required: true
+        required: true,
+        expires: '1h'
     },
     timeStamp: {
         type: Date
