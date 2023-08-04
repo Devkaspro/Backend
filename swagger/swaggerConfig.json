@@ -3,18 +3,18 @@
   "info": {
     "title": "Kaspro Upload-316",
     "description": "Development & In-house Apps Wireless Installation.!",
-    "version":"1.0.0",
+    "version": "1.0.0",
     "contact": {
       "name": "Upload-316 ",
-      "email": "DevTesting316@gmail.com", 
+      "email": "DevTesting316@gmail.com",
       "url": "http://localhost:3000/"
     },
     "servers": [
-    {
-      "url": "http://localhost:5001/api-docs/#/",
-      "description": "Local server"
-    }
-  ],
+      {
+        "url": "http://localhost:5001/api-docs/#/",
+        "description": "Local server"
+      }
+    ],
     "license": {
       "name": "Kaspro Upload-316",
       "url": "https://www.kasproit.com/"
@@ -27,60 +27,68 @@
       "description": "API for users"
     }
   ],
-  "produces": ["application/json"],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-   "/employee": {
-        "produces": ["application/json"],
-        "post": {
-          "tags": ["Employee"],
-          "summary": "Register the user",
-          "parameters": [
-            {
-              "name": "user",
-              "in": "body",
-              "description": "User that we want to create",
-              "schema": {
-                "$ref": "#/definitions/createNewEmployee"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "ok",
-              "schema": {
-                "$ref": "#/definitions/createNewEmployee"
-              }
-            },
-            "201": {
-              "description": "Created"
-            },
-            "204": {
-              "description": "No Content"
-            },
-            "301": {
-              "description": "Moved Permanently"
-            },
-            "400": {
-              "description": "Bad Request"
-            },
-            "401": {
-              "description": "Unauthorized"
-            },
-            "403": {
-              "description": "Forbidden"
-            },
-            "404": {
-              "description": "Not Found"
-            },
-            "500": {
-              "description": "Internal Server Error"
+    "/employee": {
+      "produces": [
+        "application/json"
+      ],
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Register the user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "User that we want to create",
+            "schema": {
+              "$ref": "#/definitions/createNewEmployee"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "schema": {
+              "$ref": "#/definitions/createNewEmployee"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "301": {
+            "description": "Moved Permanently"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
         }
+      }
     },
     "/employee/get": {
       "get": {
-        "tags": ["Employee"],
+        "tags": [
+          "Employee"
+        ],
         "summary": "getAllEmployees",
         "responses": {
           "200": {
@@ -116,7 +124,7 @@
         }
       }
     },
-    "/employee/{id}": {
+    "/employee/delete/:{id}": {
       "parameters": [
         {
           "name": "id",
@@ -126,15 +134,53 @@
           "type": "string"
         }
       ],
-      "produces": ["application/json"],
+      "produces": [
+        "application/json"
+      ],
       "delete": {
-        "tags": ["Employee"],
+        "tags": [
+          "Employee"
+        ],
         "summary": "Delete user by id",
         "responses": {
           "200": {
-            "description": "ok",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/deleteEmployee"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/employee/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Id of the user which is to be searched",
+          "type": "string"
+        }
+      ],
+      "produces": [
+        "application/json"
+      ],
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Get user by id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/getAllEmployees"
             }
           },
           "201": {
@@ -164,25 +210,30 @@
         }
       }
     },
-    "/employee/id": {
+    "/employee/{id}": {
       "parameters": [
         {
-          "name": "id",
-          "in": "path",
-          "required": true,
-          "description": "Id of the user which is to be searched",
-          "type": "string"
+          "name": "user",
+          "in": "body",
+          "description": "update user",
+          "schema": {
+            "$ref": "#/definitions/updateUser"
+          }
         }
       ],
-      "produces": ["application/json"],
-      "get": {
-        "tags": ["Employee"],
-        "summary": "Get user by id",
+      "produces": [
+        "application/json"
+      ],
+      "patch": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Update user by id",
         "responses": {
           "200": {
             "description": "ok",
             "schema": {
-              "$ref": "#/definitions/getAllEmployees"
+              "$ref": "#/definitions/updateUser"
             }
           },
           "201": {
@@ -215,17 +266,21 @@
   },
   "definitions": {
     "createNewEmployee": {
-          "properties": {
-            "firstname": {
-              "type": "string"
-            },
-            "lastname": {
-              "type": "string"
-            }
-          }
+      "properties": {
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        }
+      }
     },
     "getAllEmployees": {
-      "required": ["id", "firstname", "lastname"],
+      "required": [
+        "id",
+        "firstname",
+        "lastname"
+      ],
       "properties": {
         "Message": {
           "type": "string"
@@ -257,6 +312,22 @@
     "Users": {
       "type": "array",
       "$ref": "#/definitions/User"
+    },
+    "updateUser": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        }
+      }
     }
   }
 }
