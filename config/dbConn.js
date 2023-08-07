@@ -5,7 +5,7 @@ const URI = "mongodb+srv://sarvesh:tC6COLSNujuBDBzI@cluster0.8clonjl.mongodb.net
 const connectDB = async () => {
     try
     {
-        await mongoose.connect(process.env.DATABASE_URI, {
+        await mongoose.connect(URI, { 
             useNewUrlParser: true,
             useUnifiedTopology: true
         });

@@ -18,6 +18,7 @@ const root = require('./routes/root.js');
 const employees = require('./routes/api/employees.js');
 const upload = require('./routes/api/upload.js');
 const contacts = require('./routes/api/contact.js');
+const viewsRoute = require('./routes/api/views.route.js');
 var LocalStorage = require('node-localstorage').LocalStorage;
 const swaggerUi = require("swagger-ui-express"),
     swaggerDoc = require("./swagger/swaggerConfig.json");
@@ -46,6 +47,7 @@ app.use('/', root);
 app.use('/employee', employees);
 app.use('/upload', upload);
 app.use('/contact', contacts);
+app.use('/views',viewsRoute)
 app.use("/api-docs", basicAuth({
     users: { 'sarvesh': 'upadhyay' },
     challenge: true,

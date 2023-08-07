@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const busboy = require('busboy');
 const Content = require('../model/Content');
+const { ViewModel } = require('../model/view.model');
 
 // const random = (() => {
 //     const buf = Buffer.alloc(16);
@@ -57,6 +58,10 @@ const createNewFile = async (req, res) => {
                 timeStamp: new Date(),
                 expirationDate: expirationDate,
             });
+            const view = await ViewModel.updateOne({}, { $inc: { views: 1 } });
+            console.log(view);
+            if (!view)
+                await ViewModel({ views: 1 }).save();
             res.status(201).json(result);
         } catch (err)
         {
